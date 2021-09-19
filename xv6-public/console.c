@@ -16,7 +16,7 @@
 #include "x86.h"
 
 void printholi(void){
-	*(int *)P2V(0xB8) = 0x4348;
+	*(int *)P2V(0xB8000) = 0x4348;
 	*(int *)P2V(0xB8002) = 0x436F;
 	*(int *)P2V(0xB8004) = 0x436C;
 	*(int *)P2V(0xB8006) = 0x4369;
