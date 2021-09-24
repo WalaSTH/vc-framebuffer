@@ -126,6 +126,9 @@ int             wait(void);
 void            wakeup(void*);
 void            yield(void);
 
+//plotpixel.c
+void            plotpixel(int x, int y, int color);
+
 // swtch.S
 void            swtch(struct context**, struct context*);
 
