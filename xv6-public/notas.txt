@@ -1,0 +1,5 @@
+Notas:
+Ver donde poner los #define para los registros. Ahora estan en console.c pero quizas podrian
+ir a otro lugar (x86.h?)
+
+
