@@ -89,6 +89,9 @@ void            log_write(struct buf*);
 void            begin_op();
 void            end_op();
 
+//modeswitch.c
+void            modeswitch(uint enable);
+
 // mp.c
 extern int      ismp;
 void            mpinit(void);
