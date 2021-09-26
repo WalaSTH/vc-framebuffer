@@ -11,13 +11,10 @@ OBJS = \
 	lapic.o\
 	log.o\
 	main.o\
-	modeswitch.o\
 	mp.o\
 	picirq.o\
 	pipe.o\
 	proc.o\
-	plotpixel.o\
-	plotrectangle.o\
 	sleeplock.o\
 	spinlock.o\
 	string.o\
@@ -29,6 +26,7 @@ OBJS = \
 	trap.o\
 	uart.o\
 	vectors.o\
+	vga.o\
 	vm.o\
 
 # Cross-compiling (e.g., on Mac OS X)
@@ -252,8 +250,8 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-	ln.c ls.c modeswitch.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c plotpixel.c plotrectangle.c umalloc.c\
+	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
+	printf.c umalloc.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 
@@ -287,4 +285,3 @@ tar:
 	(cd /tmp; tar cf - xv6) | gzip >xv6-rev10.tar.gz  # the next one will be 10 (9/17)
 
 .PHONY: dist-test dist
-

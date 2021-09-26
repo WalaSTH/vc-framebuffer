@@ -14,23 +14,24 @@
 #include "mmu.h"
 #include "proc.h"
 #include "x86.h"
+#include "vga.h"
 
 void 
 vgainit(void){
-/*
-  *(int *)P2V(0xB8000) = 0x4353;//53 4f 32 30 32 30
+
+/*   *(int *)P2V(0xB8000) = 0x4353;//53 4f 32 30 32 30
   *(int *)P2V(0xB8002) = 0x434f;
   *(int *)P2V(0xB8004) = 0x4332;
   *(int *)P2V(0xB8006) = 0x4330;
   *(int *)P2V(0xB8008) = 0x4332;
-  *(int *)P2V(0xB800A) = 0x4330;  
-*/
+  *(int *)P2V(0xB800A) = 0x4330;   */
+
   modeswitch(1);
 }
-void
+/* void
 textinit(void){
   modeswitch(0);
-}
+} */
 
 static void consputc(int);
 

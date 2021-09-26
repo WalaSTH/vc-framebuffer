@@ -2,4 +2,20 @@ Notas:
 Ver donde poner los #define para los registros. Ahora estan en console.c pero quizas podrian
 ir a otro lugar (x86.h?)
 
+Preguntar por funcion plotrectangle sobre 
+lo de "sin usar for" (y tal vez preguntar sobre argumentos de entrada)
 
+Buscar donde poner las syscalls (y no con los programas xD)
+
+modeswitch.d????
+
+Cual es la funcion de vgainit()?
+
+Mover dclaraciones de syscalls a user.h
+
+Se rompe al incluir "user.h"
+
+To do:
+1> Probar juegos de los profes
+2> Determinar que juego hacer 
+3> Calendario.

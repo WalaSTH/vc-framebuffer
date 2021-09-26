@@ -89,9 +89,6 @@ void            log_write(struct buf*);
 void            begin_op();
 void            end_op();
 
-//modeswitch.c
-void            modeswitch(uint enable);
-
 // mp.c
 extern int      ismp;
 void            mpinit(void);
@@ -126,14 +123,8 @@ int             wait(void);
 void            wakeup(void*);
 void            yield(void);
 
-//plotpixel.c
-void            plotpixel(int x, int y, int color);
-
 // swtch.S
 void            swtch(struct context**, struct context*);
-
-//plotrectangle.c
-void            plotrectangle(int x1,int y1,int x2,int y2,int color);   
 
 // spinlock.c
 void            acquire(struct spinlock*);
