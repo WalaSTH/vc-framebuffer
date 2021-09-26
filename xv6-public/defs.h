@@ -132,6 +132,9 @@ void            plotpixel(int x, int y, int color);
 // swtch.S
 void            swtch(struct context**, struct context*);
 
+//plotrectangle.c
+void            plotrectangle(int x1,int y1,int x2,int y2,int color);   
+
 // spinlock.c
 void            acquire(struct spinlock*);
 void            getcallerpcs(void*, uint*);
