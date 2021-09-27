@@ -1,7 +1,7 @@
 #include "types.h"
 #include "stat.h"
 #include "user.h"
-#include "vga.h"
+//#include "vga.h"
 
 int
 main(void)

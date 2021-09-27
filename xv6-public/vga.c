@@ -104,13 +104,15 @@ modeswitch(int enable)
   if(enable == 1 ){
     /* Turn 256-color on */
     write_regs(g_320x200x256);
-	/*Clean the "garbage" painting all black*/
-	uchar *VGA = (uchar*)0xA0000;
-	for(unsigned int i = 0;i < 320*200;++i){
-	  VGA[i] = 0x00;
-	}
-
   }
+/* 	Clean the "garbage" painting all black THIS BREAKS EVERYTHING
+	uint *VGA = (uint*)0xA0000;
+	for(unsigned int i = 0;i < 320*200;++i){
+	  VGA[i] = 1;
+	}
+  } */
+
+
   else{
     /* Disable 13h mode and turn text-mode */
     write_regs(g_80x25_text);
