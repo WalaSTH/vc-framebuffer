@@ -57,7 +57,7 @@ write_regs(uchar *regs)
 13h mode is activated when called with a positve value on enable
 text mode is activated when called with enable set to 0.*/
 void 
-modeswitch(uint enable)
+modeswitch(int enable)
 {
   //VGA REGISTER DUMPS FOR VARIOUS GRAPHICS MODES//
   /* 256-color */   
@@ -101,7 +101,7 @@ modeswitch(uint enable)
     0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F,
     0x0C, 0x00, 0x0F, 0x08, 0x00
   };
-  if(enable > 0){
+  if(enable == 1 ){
     /* Turn 256-color on */
     write_regs(g_320x200x256);
 	/*Clean the "garbage" painting all black*/

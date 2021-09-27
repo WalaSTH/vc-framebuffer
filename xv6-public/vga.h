@@ -26,4 +26,4 @@
 
 void plotpixel(int x, int y, int color);
 void plotrectangle(int x1,int y1,int x2,int y2,int color);
-void modeswitch(uint enable);
+void modeswitch(int enable);
