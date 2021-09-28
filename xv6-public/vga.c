@@ -122,15 +122,15 @@ modeswitch(int enable)
 /////////////
 
 void
-plotpixel(int x, int y, int color)
+plotpixel(int x, int y, char color)
 {
   int position = 0xA0000 + x + (y * 320);
-  *(int *)P2V(position) = color;
+  *(char *)P2V(position) = color;
 }
 
 
 void
-plotrectangle(int x1,int y1,int x2,int y2,int color){
+plotrectangle(int x1,int y1,int x2,int y2,char color){
   for(int i = x1; i < (x2 - x1); ++i ){
     for(int j = y1; j < (y2 - y1); ++j){
       plotpixel(i,j,color);

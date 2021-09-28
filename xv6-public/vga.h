@@ -24,6 +24,6 @@
 #define    VGA_NUM_REGS        (1 + VGA_NUM_SEQ_REGS + VGA_NUM_CRTC_REGS + \
                 VGA_NUM_GC_REGS + VGA_NUM_AC_REGS)
 
-void plotpixel(int x, int y, int color);
-void plotrectangle(int x1,int y1,int x2,int y2,int color);
+void plotpixel(int x, int y, char color);
+void plotrectangle(int x1,int y1,int x2,int y2,char color);
 void modeswitch(int enable);
