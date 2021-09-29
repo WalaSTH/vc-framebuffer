@@ -131,8 +131,8 @@ plotpixel(int x, int y, char color)
 
 void
 plotrectangle(int x1,int y1,int x2,int y2,char color){
-  for(int i = x1; i < (x2 - x1); ++i ){
-    for(int j = y1; j < (y2 - y1); ++j){
+  for(int i = x1; i < (x2); ++i ){
+    for(int j = y1; j < (y2); ++j){
       plotpixel(i,j,color);
     }
   }
