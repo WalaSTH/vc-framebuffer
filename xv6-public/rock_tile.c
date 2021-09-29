@@ -70,7 +70,7 @@ void print_rock_tile(int pos_x, int pos_y, int color){
     vertdown(pos_x + 9 *scale, pos_y + 6 *scale , 4,scale, 14);
 }
 
-void print_tile_matrix(int pos_x, int pos_y, int wide, int height, int color){
+void rock_tile_matrix(int pos_x, int pos_y, int wide, int height, int color){
     pos_x = pos_x * N;
     pos_y = pos_y * N;
     int prev_y = pos_y;
