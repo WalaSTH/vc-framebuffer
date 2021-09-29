@@ -2,6 +2,7 @@
 #include "user.h"
 //#include "drawing.c"
 #include "rock_tile.c"
+#include "redOctorok_tile.c"
 
 int main(void){
     modeswitch(1);
@@ -9,5 +10,6 @@ int main(void){
     //print_rock_tile(0,0,2);
     print_tile_matrix(0,0,6,2,2);
     print_tile_matrix(9,0,7,4,2);
+    drawRedO(100,100);
     exit();
 }
