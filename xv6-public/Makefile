@@ -26,6 +26,7 @@ OBJS = \
 	trap.o\
 	uart.o\
 	vectors.o\
+	tiles.o\
 	vga.o\
 	vm.o\
 

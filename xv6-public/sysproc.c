@@ -7,6 +7,7 @@
 #include "mmu.h"
 #include "proc.h"
 #include "vga.h"
+#include "tiles.h"
 
 int
 sys_fork(void)
@@ -119,4 +120,42 @@ sys_plotrectangle(void){
 	argint(4,&color);
 	plotrectangle(x1,y1,x2,y2,color);
 	return 0;
+}
+
+//tiles.c
+
+int
+sys_rock_tile_matrix(void){
+  int pos_x, pos_y, wide, height, color;
+  argint(0,&pos_x);
+  argint(1,&pos_y);
+  argint(2,&wide);
+  argint(3,&height);
+  argint(4,&color);
+  rock_tile_matrix(pos_x, pos_y, wide, height, color);
+  return 0;
+}
+
+int
+sys_rock_bottom_matrix(void){
+  int pos_x, pos_y, wide, height, color;
+  argint(0,&pos_x);
+  argint(1,&pos_y);
+  argint(2,&wide);
+  argint(3,&height);
+  argint(4,&color);
+  rock_bottom_matrix(pos_x, pos_y, wide, height, color);
+  return 0;
+}
+
+int
+sys_tree_tile_matrix(void){
+  int pos_x, pos_y, wide, height, color;
+  argint(0,&pos_x);
+  argint(1,&pos_y);
+  argint(2,&wide);
+  argint(3,&height);
+  argint(4,&color);
+  tree_tile_matrix(pos_x, pos_y, wide, height, color);
+  return 0;
 }
