@@ -39,7 +39,8 @@ int main(void){
     drawRedO1(80,100);
     drawRedO2(100,100);
     drawLink1(120,100);
-    drawLink2(140,100);
+    drawLink3(140,100);
+    drawLink4(160,100);
     exit();
 }
 
