@@ -108,7 +108,7 @@ static void print_rock_bottom_tile(int pos_x, int pos_y, int color){
 
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            plotpixel(pos_x, pos_y, color);
+            plotpixel(pos_x, pos_y, 14);
             pos_y = pos_y + 1;
         }
         pos_y = prev_y;
@@ -142,19 +142,19 @@ static void print_rock_bottom_tile(int pos_x, int pos_y, int color){
 
     //----------Details white----------
     //1 0 1
-    vertdown(pos_x + 1 *scale, pos_y + 0 *scale, 1, scale, 2);
+    vertdown(pos_x + 1 *scale, pos_y + 0 *scale, 1, scale, color);
     //1 2 6
-    vertdown(pos_x + 1 *scale, pos_y + 2 *scale, 6, scale, 2);
+    vertdown(pos_x + 1 *scale, pos_y + 2 *scale, 6, scale, color);
     //2 0 1
-    vertdown(pos_x + 2 *scale, pos_y + 0 *scale, 1, scale, 2);
+    vertdown(pos_x + 2 *scale, pos_y + 0 *scale, 1, scale, color);
     //3 0 8
-    vertdown(pos_x + 3 *scale, pos_y + 0 *scale, 8, scale, 2);
+    vertdown(pos_x + 3 *scale, pos_y + 0 *scale, 8, scale, color);
     //4 0 6
-    vertdown(pos_x + 4 *scale, pos_y + 0 *scale, 6, scale, 2);
+    vertdown(pos_x + 4 *scale, pos_y + 0 *scale, 6, scale, color);
     //7 0 5
-    vertdown(pos_x + 7 *scale, pos_y + 0 *scale, 5, scale, 2);
+    vertdown(pos_x + 7 *scale, pos_y + 0 *scale, 5, scale, color);
     //8 0 4
-    vertdown(pos_x + 8 *scale, pos_y + 0 *scale, 4, scale, 2);
+    vertdown(pos_x + 8 *scale, pos_y + 0 *scale, 4, scale, color);
 }
 void rock_bottom_matrix(int pos_x, int pos_y, int wide, int height, int color){
     pos_x = pos_x * N;

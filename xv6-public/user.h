@@ -1,5 +1,3 @@
-#ifndef _USER_H
-#define _USER_H
 struct stat;
 struct rtcdate;
 
@@ -30,9 +28,9 @@ void plotpixel(int, int, int);
 void plotrectangle(int, int, int,int,int);
 
 //tiles.c
-void rock_tile_matrix(int, int, int,int,int);
-void rock_bottom_matrix(int, int, int,int,int);
-void tree_tile_matrix(int, int, int,int,int);
+void rock_tile_matrix(int pos_x, int pos_y, int wide, int height, int color);
+void rock_bottom_matrix(int pos_x, int pos_y, int wide, int height, int color);
+void tree_tile_matrix(int pos_x, int pos_y, int wide, int height, int color);
 
 
 // ulib.c
@@ -48,4 +46,3 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
-#endif
