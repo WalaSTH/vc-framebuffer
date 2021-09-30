@@ -17,6 +17,7 @@ void draw_map0(int color){
     rock_tile_matrix(0,7,2,3,color);
     rock_tile_matrix(14,7,2,3,color);
     rock_tile_matrix(9,0,7,4,color);
+    rock_tile_matrix(10,4,6,1,color);
     rock_tile_matrix(2,9,12,1,color);
     //Bottom rock
     rock_bottom_matrix(6,1,1,1,color);
@@ -34,7 +35,7 @@ void draw_map0(int color){
 int main(void){
 	modeswitch(1);
     //print_rock_tile(0,0,2);
-    draw_map0(3);    
+    draw_map0(2);    
     drawRedO1(80,100);
     drawRedO2(100,100);
     drawLink1(120,100);
