@@ -44,6 +44,8 @@ int main(void){
     drawLinkR2(180,100);
     drawLinkU1(120,120);
     drawLinkU2(140,120);
+    drawLinkL1(160,120);
+    drawLinkL2(180,120);
     exit();
 }
 
