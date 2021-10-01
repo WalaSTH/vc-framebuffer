@@ -38,9 +38,12 @@ int main(void){
     draw_map0(2);    
     drawRedO1(80,100);
     drawRedO2(100,100);
-    drawLink1(120,100);
-    drawLink3(140,100);
-    drawLink4(160,100);
+    drawLinkD1(120,100);
+    drawLinkD2(140,100);
+    drawLinkR1(160,100);
+    drawLinkR2(180,100);
+    drawLinkU1(120,120);
+    drawLinkU2(140,120);
     exit();
 }
 
