@@ -2,7 +2,10 @@
 #include "types.h"
 #include "x86.h"
 #include "memlayout.h"
+#include "spinlock.h"
+#include "defs.h"
 
+struct spinlock sl;
 static void 
 write_regs(uchar *regs)
 {
@@ -135,7 +138,6 @@ plotpixel(int x, int y, char color)
   *(char *)P2V(position) = color;
 }
 
-
 void
 plotrectangle(int x1,int y1,int x2,int y2,char color){
   for(int i = x1; i < (x2); ++i ){
@@ -154,10 +156,9 @@ struct {
 } input;
 
 int 
-getch(int (*getc)(void))
+getch(void)
 {
   int c;
-  c = getc();
   if(input.r ==  input.e)
     return -1;
 
@@ -165,16 +166,15 @@ getch(int (*getc)(void))
   return c;
 }
 
-void graphicsintr(int (*getch) (void)){
+void 
+graphicsintr(int (*getc) (void)){
   int c;
   acquire(&sl);
-	
-	while((c = getc()) >= 0) {
+    while((c = getc()) >= 0) {
 		if(c != 0 && input.e-input.r < INPUT_BUF) {
 			input.buf[input.e++ % INPUT_BUF] = c;
 		}
 	}
-	
-	release(&sl);
+  release(&sl);
   
 }

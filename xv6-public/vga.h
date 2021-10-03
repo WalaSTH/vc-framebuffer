@@ -27,3 +27,6 @@
 void plotpixel(int x, int y, char color);
 void plotrectangle(int x1,int y1,int x2,int y2,char color);
 void modeswitch(int enable);
+int	getch(void);
+int is_graph_mode(void);
+void graphicsintr(int (*getc) (void));

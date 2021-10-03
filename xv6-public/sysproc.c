@@ -159,3 +159,8 @@ sys_tree_tile_matrix(void){
   tree_tile_matrix(pos_x, pos_y, wide, height, color);
   return 0;
 }
+
+int 
+sys_getch(void){
+  return getch();
+}

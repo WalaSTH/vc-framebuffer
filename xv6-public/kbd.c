@@ -2,6 +2,7 @@
 #include "x86.h"
 #include "defs.h"
 #include "kbd.h"
+#include "vga.h"
 
 int
 kbdgetc(void)
@@ -46,5 +47,10 @@ kbdgetc(void)
 void
 kbdintr(void)
 {
-  consoleintr(kbdgetc);
+  if(is_graph_mode() == 0){
+    consoleintr(kbdgetc);
+  }
+  else if (is_graph_mode() == 1){
+    graphicsintr(kbdgetc);
+  }  
 }

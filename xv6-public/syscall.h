@@ -26,3 +26,4 @@
 #define SYS_rock_tile_matrix   25
 #define SYS_rock_bottom_matrix 26
 #define SYS_tree_tile_matrix   27
+#define SYS_getch              28
