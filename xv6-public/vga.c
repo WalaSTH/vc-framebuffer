@@ -53,6 +53,7 @@ write_regs(uchar *regs)
   outb(VGA_AC_INDEX, 0x20);
 }
 
+int graph_mode = 0;
 /*video_toggle will toggle between 13h mode and text mode.
 13h mode is activated when called with a positve value on enable
 text mode is activated when called with enable set to 0.*/
@@ -104,6 +105,7 @@ modeswitch(int enable)
   if(enable == 1 ){
     /* Turn 256-color on */
     write_regs(g_320x200x256);
+    graph_mode = 1;
 
     /* 	Clean the "garbage" painting all black */
     for(unsigned int i = 0;i<320;++i)
@@ -115,6 +117,11 @@ modeswitch(int enable)
     /* Disable 13h mode and turn text-mode */
     write_regs(g_80x25_text);
   }
+}
+
+int 
+is_graph_mode(void){
+  return graph_mode;
 }
 
 //////////////
@@ -138,3 +145,36 @@ plotrectangle(int x1,int y1,int x2,int y2,char color){
   }
 }
 
+#define INPUT_BUF 128
+struct {
+  char buf[INPUT_BUF];
+  uint r;  // Read index
+  uint w;  // Write index
+  uint e;  // Edit index
+} input;
+
+int 
+getch(int (*getc)(void))
+{
+  int c;
+  c = getc();
+  if(input.r ==  input.e)
+    return -1;
+
+  c = input.buf[input.r++ % INPUT_BUF];
+  return c;
+}
+
+void graphicsintr(int (*getch) (void)){
+  int c;
+  acquire(&sl);
+	
+	while((c = getc()) >= 0) {
+		if(c != 0 && input.e-input.r < INPUT_BUF) {
+			input.buf[input.e++ % INPUT_BUF] = c;
+		}
+	}
+	
+	release(&sl);
+  
+}
