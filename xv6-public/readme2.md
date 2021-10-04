@@ -45,11 +45,9 @@ Lo primero es dibujar una roca como esta, que aparece en todo el mapa del juego.
 Lo siguiente, es tener una funcion que pueda dibujar en pantalla una matriz de estas rocas, dando origen a la funcion
 void rock_bottom_matrix(int pos_x, int pos_y, int wide, int height, int color)
 Que dadas una posicion x,y, un ancho y un alto, y un color dibuja una matriz de estas rocas en la deseada posicion, con las deseadas dimensiones.
-(imagen donde se vea una matriz de tiles roca)
+(./img/matrix.png)
 
-Lo mismo ocurre para otros dibujos relacionados con el escenario, como lo son los arboles y otra roca que que tiene una curvatura:
-(imagen de arbol) (imagen de rock_bottom)
-
+Lo mismo ocurre para otros dibujos relacionados con el escenario, como lo son los arboles y otra roca que que tiene una curvatura.
 Teniendo estas funciones, la tarea de crear un escenario que recree los originales en The Legend of Zelda (o incluso nuevos escenarios) es bastante sencilla, puesto que el juego no tiene una geometría muy compleja, y los colores de los mapas varian entre verde, rojo y azul.
 
 Sprites:
