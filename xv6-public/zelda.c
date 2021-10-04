@@ -38,7 +38,8 @@ int main(void){
     
     modeswitch(1);
     draw_map0(2);
-    int x, y;
+    int x, y, counter;
+    counter = 0;
     x = 120;
     y = 100;
     drawLinkD1(x,y);
@@ -48,33 +49,54 @@ int main(void){
     {
     case 'w':
         /* move up */
-        //pintar mapa
+        //rectangle
         plotrectangle(x,y, x+15, y+16, 14);
-        //mover abajo
         y = y - 2;
-
-        drawLinkU1(x,y);
-        
+        if(counter % 6 < 3){ 
+            drawLinkU1(x,y);
+            counter++; 
+        }else{
+            drawLinkU2(x,y);
+            counter++;
+        }        
         break;
     case 'a':
         plotrectangle(x,y, x+15, y+16, 14);
         /* move left */
         x = x - 2;
-        drawLinkL1(x,y);
+        if(counter % 6 < 3){ 
+            drawLinkL1(x,y);
+            counter++; 
+        }else{
+            drawLinkL2(x,y);
+            counter++;
+        }  
         
         break;
-    case 's':        
+    case 's':
+        //rectangle        
         plotrectangle(x,y, x+15, y+16, 14);
         y = y + 2;
-        /* move dwn */
-        drawLinkD1(x,y);        
+        // move dwn
+        if(counter % 6 < 3){ 
+            drawLinkD1(x,y);
+            counter++; 
+        }else{
+            drawLinkD2(x,y);
+            counter++;
+        }       
         break;
     case 'd':
         plotrectangle(x,y, x+15, y+16, 14);
         /* move right */
         x = x + 2;
-        drawLinkR1(x,y);
-        
+        if(counter % 6 < 3){ 
+            drawLinkR1(x,y);
+            counter++; 
+        }else{
+            drawLinkR2(x,y);
+            counter++;
+        }  
         break;
     default:
         break;
