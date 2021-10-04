@@ -1,3 +1,5 @@
+#ifndef LINK_TILE
+#define LINK_TILE
 #include "types.h"
 #include "user.h"
 #define HEIGHT 16
@@ -215,3 +217,4 @@ drawLinkU2(int xV,int yV){
 
   plotImg(xV,yV,img);
 }
+#endif

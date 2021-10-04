@@ -1,48 +1,169 @@
 #ifndef CHAR_C
 #define CHAR_C
+
 #include "character.h"
+
 #define HEIGHT 16
 #define WIDTH  15
+#define MO 2
 
-void 
-plotImg2(int xV,int yV,int img[]){
-  int x = xV,y = yV;
-    for(unsigned int i=0; i<WIDTH*HEIGHT; i++){
-      if(i==0){
-        plotPixel(x,y,img[i]);
+
+character create_character(){
+  character c;
+  /*Start at middle of the map*/
+  c = set_position(120,100,c);
+  for(unsigned int i = 0; i<4;++i)
+    c.spriteCounter[i] = 0;
+
+  return c;
+}
+
+static int good_move_up(int x, int y){
+    char color;
+    int ret = 1;
+    y = y - MO;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(i+x,y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+static int good_move_down(int x, int y){
+    char color;
+    int ret = 1;
+    y = y + MO + HEIGHT;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(i+x,y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+
+static int good_move_left(int x, int y){
+    char color;
+    int ret = 1;
+    x = x - MO; 
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(x,i+y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+
+static int good_move_right(int x, int y){
+    char color;
+    int ret = 1;
+    x = x + MO + WIDTH;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(x,i+y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+
+character
+move_up(character c){
+  int x = c.pos_x; int y = c.pos_y;
+  plotrectangle(x,y, x+15, y+16, 14);
+        
+  if(good_move_up(x,y)){
+      y = y - 2;
+      if(c.spriteCounter[0] % 6 < 3){ 
+          drawLinkU1(x,y);
+          c.spriteCounter[0]++; 
+      }else{
+          drawLinkU2(x,y);
+          c.spriteCounter[0]++;
       }
-    else{
-	    if(i%WIDTH == 0){
-	      y = y + 1;
-		    x = xV;
-		    plotPixel(x,y,img[i]);
-	    }
-	  else{
-			  x = x + 1;
-			  plotPixel(x,y,img[i]);
-	    }
-    }
-  }  
+  }
+  else{
+      drawLinkU2(x,y);  
+  }
+  c.pos_x = x;
+  c.pos_y = y;
+  return c;        
 }
-character set_sprite(int s[], int length){
-    character new;
-    for (int i = 0; i < length; i++){
-        new.sprite[i] = s[i];
-    }
-    return new;
+
+character
+move_down(character c){
+  int x = c.pos_x; int y = c.pos_y;
+  plotrectangle(x,y, x+15, y+16, 14);
+        
+  if(good_move_down(x,y)){
+      y = y + 2;
+      if(c.spriteCounter[1] % 6 < 3){ 
+          drawLinkD1(x,y);
+          c.spriteCounter[1]++; 
+      }else{
+          drawLinkD2(x,y);
+          c.spriteCounter[1]++;
+      }
+  }
+  else{
+      drawLinkD1(x,y);  
+  }
+  c.pos_x = x;
+  c.pos_y = y;
+  return c;    
 }
-void set_position(int x, int y, character c){
-    c.position.pos_x = x;
-    c.position.pos_y = y;
+
+character
+move_left(character c){
+int x = c.pos_x; int y = c.pos_y;
+  plotrectangle(x,y, x+15, y+16, 14);
+        
+  if(good_move_left(x,y)){
+      x = x - 2;
+      if(c.spriteCounter[2] % 6 < 3){ 
+          drawLinkL1(x,y);
+          c.spriteCounter[2]++; 
+      }else{
+          drawLinkL2(x,y);
+          c.spriteCounter[2]++;
+      }
+  }
+  else{
+      drawLinkL1(x,y);  
+  }
+  c.pos_x = x;
+  c.pos_y = y;
+  return c;
+}  
+
+character
+move_right(character c){
+int x = c.pos_x; int y = c.pos_y;
+  plotrectangle(x,y, x+15, y+16, 14);
+        
+  if(good_move_right(x,y)){
+      x = x + 2;
+      if(c.spriteCounter[3] % 6 < 3){ 
+          drawLinkR1(x,y);
+          c.spriteCounter[3]++; 
+      }else{
+          drawLinkR2(x,y);
+          c.spriteCounter[3]++;
+      }
+  }
+  else{
+      drawLinkR1(x,y);  
+  }
+  c.pos_x = x;
+  c.pos_y = y;
+  return c;
+}  
+
+
+character set_position(int x, int y, character c){
+    c.pos_x = x;
+    c.pos_y= y;
+    return c;
 }
-void print_character(character c){
-    int img4[10] = {1,2,3,4};
-    plotImg2(0,0,img4); 
-}
+
 int x_position(character c){
-    return c.position.pos_x;
+    return c.pos_x;
 }
 int y_position(character c){
-    return c.position.pos_y;
+    return c.pos_y;
 }
 #endif
