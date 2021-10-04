@@ -138,6 +138,12 @@ plotpixel(int x, int y, char color)
   *(char *)P2V(position) = color;
 }
 
+char 
+get_color(int x, int y){
+    int position = 0xA0000 + x + (y * 320);
+    return *(char *)P2V(position);
+}
+
 void
 plotrectangle(int x1,int y1,int x2,int y2,char color){
   for(int i = x1; i < (x2); ++i ){

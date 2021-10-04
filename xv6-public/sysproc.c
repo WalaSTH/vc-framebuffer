@@ -164,3 +164,10 @@ int
 sys_getch(void){
   return getch();
 }
+
+int sys_get_color(void){
+    int x, y;
+    argint(0,&x);
+    argint(1,&y);
+    return get_color(x,y);
+}

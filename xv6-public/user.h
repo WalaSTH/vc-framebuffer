@@ -27,6 +27,7 @@ void modeswitch(int);
 void plotpixel(int, int, int);
 void plotrectangle(int, int, int,int,int);
 int getch(void);
+char get_color(int x, int y);
 
 //tiles.c
 void rock_tile_matrix(int pos_x, int pos_y, int wide, int height, int color);

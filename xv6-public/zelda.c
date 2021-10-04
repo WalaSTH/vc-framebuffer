@@ -5,6 +5,7 @@
 #include "redOctorok_tile.c"
 #include "link_tile.c"
 #include "character.c"
+#define MO 2
 
 void draw_map0(int color){
     //Floor
@@ -32,10 +33,50 @@ void draw_map0(int color){
     //Cave
     plotrectangle(80,20,100,40,0);
 }
+int good_move_up(int x, int y){
+    char color;
+    int ret = 1;
+    y = y - MO;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(i+x,y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+int good_move_down(int x, int y){
+    char color;
+    int ret = 1;
+    y = y + MO + HEIGHT;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(i+x,y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
 
+int good_move_left(int x, int y){
+    char color;
+    int ret = 1;
+    x = x - MO; 
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(x,i+y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
+
+int good_move_right(int x, int y){
+    char color;
+    int ret = 1;
+    x = x + MO + WIDTH;
+    for(int i = 0; i < WIDTH; ++i){
+        color = (char)get_color(x,i+y);
+        ret = ret && (color != 2 && color != 0);
+    }
+    return ret;
+}
 
 int main(void){
-    
     modeswitch(1);
     draw_map0(2);
     int x, y, counter;
@@ -51,52 +92,72 @@ int main(void){
         /* move up */
         //rectangle
         plotrectangle(x,y, x+15, y+16, 14);
-        y = y - 2;
-        if(counter % 6 < 3){ 
-            drawLinkU1(x,y);
-            counter++; 
-        }else{
-            drawLinkU2(x,y);
-            counter++;
+        
+        if(good_move_up(x,y)){
+            y = y - 2;
+            if(counter % 6 < 3){ 
+                drawLinkU1(x,y);
+                counter++; 
+            }else{
+                drawLinkU2(x,y);
+                counter++;
+            }
+        }
+        else{
+            drawLinkU2(x,y);  
         }        
         break;
     case 'a':
         plotrectangle(x,y, x+15, y+16, 14);
-        /* move left */
-        x = x - 2;
-        if(counter % 6 < 3){ 
+        /* move left */                
+        if(good_move_left(x,y)){
+            x = x - 2;
+            if(counter % 6 < 3){ 
+                drawLinkL1(x,y);
+                counter++; 
+            }else{
+                drawLinkL2(x,y);
+                counter++;
+            }
+        }
+        else{
             drawLinkL1(x,y);
-            counter++; 
-        }else{
-            drawLinkL2(x,y);
-            counter++;
-        }  
-        
+        } 
         break;
     case 's':
         //rectangle        
-        plotrectangle(x,y, x+15, y+16, 14);
-        y = y + 2;
+        plotrectangle(x,y, x+15, y+16, 14);        
         // move dwn
-        if(counter % 6 < 3){ 
-            drawLinkD1(x,y);
-            counter++; 
-        }else{
-            drawLinkD2(x,y);
-            counter++;
-        }       
+        if(good_move_down(x,y)){
+            y = y + 2;
+            if(counter % 6 < 3){ 
+                drawLinkD1(x,y);
+                counter++; 
+            }else{
+                drawLinkD2(x,y);
+                counter++;
+            }
+        }
+        else{
+            drawLinkD2(x,y);            
+        }         
         break;
     case 'd':
         plotrectangle(x,y, x+15, y+16, 14);
         /* move right */
-        x = x + 2;
-        if(counter % 6 < 3){ 
-            drawLinkR1(x,y);
-            counter++; 
-        }else{
+        if(good_move_right(x,y)){
+            x = x + 2;
+            if(counter % 6 < 3){ 
+                drawLinkR1(x,y);
+                counter++; 
+            }else{
+                drawLinkR2(x,y);
+                counter++;
+            }
+        }
+        else{
             drawLinkR2(x,y);
-            counter++;
-        }  
+        }   
         break;
     default:
         break;

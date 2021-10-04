@@ -30,3 +30,4 @@ void modeswitch(int enable);
 int	getch(void);
 int is_graph_mode(void);
 void graphicsintr(int (*getc) (void));
+char get_color(int x, int y);

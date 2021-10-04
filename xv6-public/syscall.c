@@ -110,6 +110,7 @@ extern int sys_rock_tile_matrix(void);
 extern int sys_rock_bottom_matrix(void);
 extern int sys_tree_tile_matrix(void);
 extern int sys_getch(void);
+extern int sys_get_color(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -140,6 +141,7 @@ static int (*syscalls[])(void) = {
 [SYS_rock_bottom_matrix] sys_rock_bottom_matrix,
 [SYS_tree_tile_matrix] sys_tree_tile_matrix,
 [SYS_getch] sys_getch,
+[SYS_get_color] sys_get_color,
 };
 
 void
