@@ -4,6 +4,7 @@
 //#include "rock_tile.c"
 #include "redOctorok_tile.c"
 #include "link_tile.c"
+#include "character.c"
 
 void draw_map0(int color){
     //Floor
@@ -32,11 +33,50 @@ void draw_map0(int color){
     plotrectangle(80,20,100,40,0);
 }
 
+
 int main(void){
-	modeswitch(1);
-    //print_rock_tile(0,0,2);
-    draw_map0(2);    
-    drawRedO1(80,100);
+    
+    modeswitch(1);
+    draw_map0(2);
+    int x, y;
+    x = 120;
+    y = 100;
+    while(1){
+    int key = getch();
+    switch (key)
+    {
+    case 'w':
+        /* move up */
+        //pintar mapa
+        draw_map0(2);
+        //mover abajo
+
+        drawLinkU1(x,y);
+        y = y - 2;
+        break;
+    case 'a':
+        draw_map0(2);
+        /* move left */
+        drawLinkL1(x,y);
+        x = x - 2;
+        break;
+    case 's':
+        draw_map0(2);
+        /* move dwn */
+        drawLinkD1(x,y);
+        y = y + 2;
+        break;
+    case 'd':
+        draw_map0(2);
+        /* move right */
+        drawLinkR1(x,y);
+        x = x + 2;
+        break;
+    default:
+        break;
+    }
+    //print_rock_tile(0,0,2);       
+/*     drawRedO1(80,100);
     drawRedO2(100,100);
     drawLinkD1(120,100);
     drawLinkD2(140,100);
@@ -45,7 +85,8 @@ int main(void){
     drawLinkU1(120,120);
     drawLinkU2(140,120);
     drawLinkL1(160,120);
-    drawLinkL2(180,120);
+    drawLinkL2(180,120);  */   
+    }
     exit();
 }
 
