@@ -9,8 +9,7 @@ typedef struct character_s character;
 struct character_s {
     int spriteCounter[4]; //Counter for [UP,DOWN,LEFT,RIGTH] 
     int pos_x;int pos_y;
-    int counter;
-    //int health;
+
 };
 
 character create_character();

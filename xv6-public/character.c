@@ -18,28 +18,31 @@ character create_character(){
   return c;
 }
 
-static int good_move_up(int x, int y){
-    char color;
-    int ret = 1;
-    y = y - MO;
-    for(int i = 0; i < WIDTH; ++i){
-        color = (char)get_color(i+x,y);
-        ret = ret && (color != 2 && color != 0);
-    }
-    return ret;
+static int 
+good_move_up(int x, int y){
+  char color;
+  int ret = 1;
+  y = y - MO;
+  for(int i = 0; i < WIDTH; ++i){
+    color = (char)get_color(i+x,y);
+    ret = ret && (color != 2 && color != 0);
+  }
+  return ret;
 }
-static int good_move_down(int x, int y){
-    char color;
-    int ret = 1;
-    y = y + MO + HEIGHT;
-    for(int i = 0; i < WIDTH; ++i){
-        color = (char)get_color(i+x,y);
-        ret = ret && (color != 2 && color != 0);
-    }
-    return ret;
+static int 
+good_move_down(int x, int y){
+  char color;
+  int ret = 1;
+  y = y + MO + HEIGHT;
+  for(int i = 0; i < WIDTH; ++i){
+    color = (char)get_color(i+x,y);
+    ret = ret && (color != 2 && color != 0);
+  }
+  return ret;
 }
 
-static int good_move_left(int x, int y){
+static int 
+good_move_left(int x, int y){
     char color;
     int ret = 1;
     x = x - MO; 
@@ -50,15 +53,16 @@ static int good_move_left(int x, int y){
     return ret;
 }
 
-static int good_move_right(int x, int y){
-    char color;
-    int ret = 1;
-    x = x + MO + WIDTH;
-    for(int i = 0; i < WIDTH; ++i){
-        color = (char)get_color(x,i+y);
-        ret = ret && (color != 2 && color != 0);
-    }
-    return ret;
+static int 
+good_move_right(int x, int y){
+  char color;
+  int ret = 1;
+  x = x + MO + WIDTH;
+  for(int i = 0; i < WIDTH; ++i){
+    color = (char)get_color(x,i+y);
+    ret = ret && (color != 2 && color != 0);
+  }
+  return ret;
 }
 
 character
@@ -153,17 +157,19 @@ int x = c.pos_x; int y = c.pos_y;
   return c;
 }  
 
-
-character set_position(int x, int y, character c){
-    c.pos_x = x;
-    c.pos_y= y;
-    return c;
+character 
+set_position(int x, int y, character c){
+  c.pos_x = x;
+  c.pos_y= y;
+  return c;
 }
 
-int x_position(character c){
-    return c.pos_x;
+int 
+x_position(character c){
+  return c.pos_x;
 }
-int y_position(character c){
-    return c.pos_y;
+int
+y_position(character c){
+  return c.pos_y;
 }
 #endif
