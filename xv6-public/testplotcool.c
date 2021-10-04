@@ -69,6 +69,11 @@ int img1[]={
     for(i=130; i<149; ++i)
       plotpixel(i,j,img1[(j-100)*20+(i-130)]);
 
+  int r = getch();
+  while(r != 'p'){
+      r = getch();
+  }
+  modeswitch(0);
   exit();
 }
 

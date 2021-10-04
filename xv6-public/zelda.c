@@ -41,8 +41,9 @@ main(void){
   draw_map0(2);
   character link =  create_character();
   drawLinkD1(120,100);
-  int key;
-  while(1){
+  int key, play;
+  play = 1;
+  while(play){
     key = getch();
     switch (key)
     {
@@ -58,10 +59,15 @@ main(void){
     case 'd':
         link = move_right(link);
         break;
+    case 'p':
+        play = 0;
+        break;
     default:
         break;
     } 
   }
+  plotrectangle(0,0,319,199,0);
+  modeswitch(0);
   exit();
 }
 

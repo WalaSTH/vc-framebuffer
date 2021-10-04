@@ -504,6 +504,7 @@ getch(void)
     return -1;
 
   c = input.buf[input.r++ % INPUT_BUF];
+  input.w++;
   return c;
 }
 
