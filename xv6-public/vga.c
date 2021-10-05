@@ -514,6 +514,5 @@ graphicsintr(int (*getc) (void)){
 	  	input.buf[input.e++ % INPUT_BUF] = c;
 	  }
 	}
-  release(&sl);
-  
+  release(&sl);  
 }
