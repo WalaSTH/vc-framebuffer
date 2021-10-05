@@ -51,7 +51,7 @@ Lo mismo ocurre para otros dibujos relacionados con el escenario, como lo son lo
 Teniendo estas funciones, la tarea de crear un escenario que recree los originales en The Legend of Zelda (o incluso nuevos escenarios) es bastante sencilla, puesto que el juego no tiene una geometría muy compleja, y los colores de los mapas varian entre verde, rojo y azul.
 
 Sprites:
-Para los sprites la tarea era recrear al personaje de Link (y enemigos) de la mejor manera posible. Una de las dificultades fue el tamaño, ya que no queríamos un personaje que quedara muy chiquito en el mapa, ni muy grande. La otra cuestion fue cómo implementar dicho sprite. La solucion final fue utilizar un array ...bla bla explicacion que desconozco xd .. 
+Para los sprites la tarea era recrear al personaje de Link (y enemigos) de la mejor manera posible. Una de las dificultades fue el tamaño, ya que no queríamos un personaje que quedara muy chiquito en el mapa, ni muy grande. La otra cuestion fue cómo implementar dicho sprite. La solucion final fue utilizar un array que contenga la informacion de dónde dibujar cada pixel, y de que color.
 Como los personajes se mueven en el escenario, es necesario crear sprites para las animaciones. En el caso de Link se necesitaron dos para cada posicion a la que se enfrentase (arriba, abajo, izquierda y derecha) siendo un total de ocho sprites para que pudiera dirigirse en los cuatro sentidos, de manera que tuviera una animacion de caminar al hacerlo. 
 Como nuestra idea origial era hacer un juego interesante y más completo, idea que no ha podido concretarse debido al tiempo, pensamos que sería muy buena idea la creacion de un tipo abstracto de dato "Personaje" (o "Character" en ingles) 
 
