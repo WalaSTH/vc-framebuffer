@@ -71,10 +71,9 @@ With the following structure in mind:
 
 ```
 struct character_s {
-    int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; // This element has been discarded
-    int spriteCounter[4];
     int pos_x;
     int pos_y;
+    int spriteCounter[4];
 };
 ```
 
