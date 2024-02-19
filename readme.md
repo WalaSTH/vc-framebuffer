@@ -2,7 +2,7 @@
 
 ### Group:
 
-Virtualized, named after the OS technique.
+Virtualized, named after the OS technique of virtualization.
 
 ### Members:
 
