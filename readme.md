@@ -27,28 +27,29 @@ A continuación describiremos que se hizo en cada Tarea, los problemas que surgi
 
 ## Tarea 1:
 
-En esta primera Tarea nos topamos con la gran cantidad de archivos de extención .h, que no sabíamos bien para que se usaban y puede esto nos haya perdido un poco. El programa **vgainit()** fue facil de implementar, usamos el que nos dierón de ejemplo y unicamente cambiamos los valores, utilizando un traductor de lenguaje natural a *xuser*. Ahora se nos complico un poco la forma de ejecutarlo en el main y la primera que se nos ocurrio fue crear un archivo console.h donde estuvise nuestra función, esto si bien anduvo quedo muy feo, por lo que después de buscar un poco encontramos el archivo def.h, ya incluido en el main.c, y ahí colocamos la llamada a **vgainit()**.
+En esta primera Tarea nos topamos con la gran cantidad de archivos de extención .h, que no sabíamos bien para que se usaban y puede esto nos haya perdido un poco. El programa **vgainit()** fue facil de implementar, usamos el que nos dierón de ejemplo y unicamente cambiamos los valores, utilizando un traductor de lenguaje natural a _xuser_. Ahora se nos complico un poco la forma de ejecutarlo en el main y la primera que se nos ocurrio fue crear un archivo console.h donde estuvise nuestra función, esto si bien anduvo quedo muy feo, por lo que después de buscar un poco encontramos el archivo def.h, ya incluido en el main.c, y ahí colocamos la llamada a **vgainit()**.
 
 ## Tarea 2
+
 En esta parte del laboratorio básicamente se tenía que implementar las funciones que nos permitieran pasar de un modo a otro, lo cual es una parte fundamental del trabajo ya que en esto recaen todas las consignas siguientes.
- 
+
 Problemas que surgieron:
 Este enunciado nos trajo bastantes problemas ya que al principio estuvimos muy perdidos y no sabíamos cómo encarar el problema. Pasamos por un periodo de lectura e investigación sobre el funcionamiento de vga y el código de xv6 con el fin de poder afianzarnos más y ver si surgían ideas, si bien esto fue fundamental para todo el resto del laboratorio, en este ejercicio luego de dicho periodo seguiamos sin avanzar. Lo decisivo en este punto fue la ayuda brindada por la cátedra en el enunciado, para ser especifico:
 “Cambiar de modo implica setear valores particulares en los registros del dispositivo. Para esto es importante tener una referencia de los puertos (ver Puertos VGA en las referencias abajo) Y la super ayuda se encuentra acá: http://files.osdev.org/mirrors/geezer/osd/graphics/modes.c ”
- Una vez empezado a encarar el problema teniendo esto en cuenta todo se facilitó, lo único que tuvimos que hacer fue adaptar el código para xv6, esto fue:
-   
-  + Ajustar el estilo del código para que quede bien con el estilo utilizado en xv6
- 
- + Utilizar las funciones outb e inb de xv6
- 
- + Elegir los segmentos de código que nos interesaba i.e los modos 320x200x256 (modo gráfico 13h) y g_80x25_text (modo texto).
+Una vez empezado a encarar el problema teniendo esto en cuenta todo se facilitó, lo único que tuvimos que hacer fue adaptar el código para xv6, esto fue:
+
+- Ajustar el estilo del código para que quede bien con el estilo utilizado en xv6
+
+- Utilizar las funciones outb e inb de xv6
+
+- Elegir los segmentos de código que nos interesaba i.e los modos 320x200x256 (modo gráfico 13h) y g_80x25_text (modo texto).
 
 ## Tarea 3
-En este punto se nos pedia modularizar lo visto en la tarea II, implementado así las syscall modeswitch y plotpixel. 
+
+En este punto se nos pedia modularizar lo visto en la tarea II, implementado así las syscall modeswitch y plotpixel.
 Para esto y antes que nada creamos los archivos modeswitch.c, a donde trasladomos lo visto en la tarea II con el fin de modularlo y plotpixel.c, donde implementamos la función utilizando la información dada en el enunciado y la llamada a **P2V()**
 En este momento es cuando se complico un poco, ya que tuvimos que aprender como agregar una llamada al sistema. Por lo tanto nos pusimos a rastrear como estaban implementadas las demás syscalls, en que archivos estaban definidas, donde se declaraban los objetos y demás. Una vez visto esto, hicimos la prueba agregando los .c y .o en Makefile y los prototipos en defs.h
 En el medio agregamos al modeswitch.c una función para que limpiase toda la basura que quedaba del modo texto. A los días nos dimos cuenta que había una mejor forma de agregar las syscalls así que quitamos lo hecho y agregamos los extern int, [SYS_modeswitch] y [SYS_plotpixel] al archivo syscall.c y agregamos los define en el syscall.h
-
 
 ## Tarea 4: Recreando Zelda de NES (y sufriendo en el intento)
 
@@ -67,14 +68,19 @@ Sprites: Para los sprites la tarea era recrear al personaje de Link (y enemigos)
 
 Con la siguiente estructura en mente: struct character_s { int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; //Este elemento ha sido descartado int spriteCounter[4]; int pos_x;int pos_y; }; diseñamos el TAD Character, donde en sprites se encontraría el arreglo con la informacion para dibujar al personaje (algo que ha sido removido de la entrega final, más sobre esto adelante.) un counter que sirve para elegir un correcto sprite a la hora de moverse y tener así una animacion, y las posiciones x e y en la pantalla. Y con los operaciones como: Crear un nuevo personaje dado unos sprites y unas posiciones, pintar un personaje en pantalla, obtener la posicion de un personaje dado, y funciones para mover a un personaje en la pantalla luego de recibir un input y chequeando que no se colisione con el escenario. Este TAD se encuentran en el modulo character.h/c y ha sido de gran utilidad a la hora de programar el codigo principal del juego, ayudando ademas su la legibilidad. Sin embargo debido a que el trabajo se ha relentizado considerablemente debido pequeños problemas que tardamos tiempo en solucionar, y al deadline, no hemos podido concretar nuestra primer idea. Como finalmente solo ibamos a mover a Link en el escenario (y no a otros personajes como iban a ser diferentes enemigos), terminamos recortando este TAD y quitamos el elemento sprites, dejando una version "hardcodeada" y que siempre trabaja con el unico personaje que llegamos a implementar. Aun así, el TAD character con su estructura y funciones ayuda bastante a la sencillez con la que podemos programar el codigo principal del juego, y es una herramienta que junto con las funciones del modulo tiles.h/c para crear mapas, nos peritió realizar un primer acercamiento a nuestra idea original con facilidad, que deja la puerta abierta para futuros progresos.
 
+### Resultado Zelda
+
+![](https://github.com/WalaSTH/vc-framebuffer/blob/master/image/zeldaDemo.gif)
+
 ## Puntos estrella
-+ Todo lo que implementaron puede ser modularizado de una manera más delicada. Teniendo en cuenta que son funciones para un mismo dispositivo pueden estar en un mismo archivo vga.{c,h}
-Para este ejercicio creamos las carpetas vga.c y vga.h, como se nos indico y fuimos creando y adecuando lo trabajado para que pudiece de dicha forma estar implementado y definido en estos archivos  
 
-+ agregar una nueva syscall: 
-**plotrectangle(int x1, int y1, int x2, int y2, int color)** 
-para dibujar rectángulos en la pantalla.
-Lo primero que hicimos fue crear el archivo plotrectangle.c donde implementamos la función mediante la utilización de dos for´s y al igual que como hicimos inicialmente en la tarea III, lo incluimos en defs.h y Makefile. Aunque después cambiamos y lo colocamos en syscall.{c,h}.
+- Todo lo que implementaron puede ser modularizado de una manera más delicada. Teniendo en cuenta que son funciones para un mismo dispositivo pueden estar en un mismo archivo vga.{c,h}
+  Para este ejercicio creamos las carpetas vga.c y vga.h, como se nos indico y fuimos creando y adecuando lo trabajado para que pudiece de dicha forma estar implementado y definido en estos archivos
 
-+ Recuperar las fuentes que se pierden cuando pasamos de modo gráfico a texto.
-Para este punto nos basamos más que nada en lo que estaba escrito en la ayuda. Solo intuimos los pequeños cambios, esto sería, usar las syscalls que vienen en xv6 como inb y outb
+- agregar una nueva syscall:
+  **plotrectangle(int x1, int y1, int x2, int y2, int color)**
+  para dibujar rectángulos en la pantalla.
+  Lo primero que hicimos fue crear el archivo plotrectangle.c donde implementamos la función mediante la utilización de dos for´s y al igual que como hicimos inicialmente en la tarea III, lo incluimos en defs.h y Makefile. Aunque después cambiamos y lo colocamos en syscall.{c,h}.
+
+- Recuperar las fuentes que se pierden cuando pasamos de modo gráfico a texto.
+  Para este punto nos basamos más que nada en lo que estaba escrito en la ayuda. Solo intuimos los pequeños cambios, esto sería, usar las syscalls que vienen en xv6 como inb y outb
