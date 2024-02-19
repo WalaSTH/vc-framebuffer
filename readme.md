@@ -1,86 +1,88 @@
-readme2
+# Introduction to the Laboratory of Operating Systems
 
-# Introducción al Laboratorio segundo de Sistemas Operativo
+### Group:
 
-### Grupo:
+Virtualized, named after the OS technique.
 
-Virtualized, nombrado así en honor a la técnica empleada por los sistemas operativos.
-
-### Integrantes:
-
-Conformado por
+### Members:
 
 - Leonardo Torres, (leo.torres@mi.unc.edu.ar)
 - Matías Scantamburlo, (matias.scantamburlo@mi.unc.edu.ar)
 - Maciel Salguero, (maciel.salguero@mi.unc.edu.ar)
 
-# Desarrollo
+# Developement
 
-En este laboratorio se trabajo para resolver 4 tareas:
+In this laboratory, work was done to solve 4 tasks:
 
-1.  Implementar en console.c una función vgainit() y llamarla al inicio del sistema.
-2.  Extender console.c con funciones que nos permitan cambiar de modo texto/gráfico
-3.  Implementar una syscall modeswitch que hace el cambio de modo (texto/gráfico) y plotpixel(int x, int y, int color) que pinte un pixel en pantalla
-4.  Hagan su propio programa de usuario que genere algún dibujo por pantalla
+1.  Implement the vgainit() function in console.c and call it at the beginning of the system.
 
-A continuación describiremos que se hizo en cada Tarea, los problemas que surgieron y cómo se solucionaron.
+2.  Extend console.c with functions that allow us to switch between text/graphic modes.
 
-## Tarea 1:
+3.  Implement a syscall modeswitch that switches between modes (text/graphic) and plotpixel(int x, int y, int color) that paints a pixel on the screen.
 
-En esta primera Tarea nos topamos con la gran cantidad de archivos de extención .h, que no sabíamos bien para que se usaban y puede esto nos haya perdido un poco. El programa **vgainit()** fue facil de implementar, usamos el que nos dierón de ejemplo y unicamente cambiamos los valores, utilizando un traductor de lenguaje natural a _xuser_. Ahora se nos complico un poco la forma de ejecutarlo en el main y la primera que se nos ocurrio fue crear un archivo console.h donde estuvise nuestra función, esto si bien anduvo quedo muy feo, por lo que después de buscar un poco encontramos el archivo def.h, ya incluido en el main.c, y ahí colocamos la llamada a **vgainit()**.
+4.  Create your our user program that generates some drawing on the screen.
 
-## Tarea 2
+Next, we will describe what was done in each task, the problems that arose, and how they were solved.
 
-En esta parte del laboratorio básicamente se tenía que implementar las funciones que nos permitieran pasar de un modo a otro, lo cual es una parte fundamental del trabajo ya que en esto recaen todas las consignas siguientes.
+## Task 1:
 
-Problemas que surgieron:
-Este enunciado nos trajo bastantes problemas ya que al principio estuvimos muy perdidos y no sabíamos cómo encarar el problema. Pasamos por un periodo de lectura e investigación sobre el funcionamiento de vga y el código de xv6 con el fin de poder afianzarnos más y ver si surgían ideas, si bien esto fue fundamental para todo el resto del laboratorio, en este ejercicio luego de dicho periodo seguiamos sin avanzar. Lo decisivo en este punto fue la ayuda brindada por la cátedra en el enunciado, para ser especifico:
-“Cambiar de modo implica setear valores particulares en los registros del dispositivo. Para esto es importante tener una referencia de los puertos (ver Puertos VGA en las referencias abajo) Y la super ayuda se encuentra acá: http://files.osdev.org/mirrors/geezer/osd/graphics/modes.c ”
-Una vez empezado a encarar el problema teniendo esto en cuenta todo se facilitó, lo único que tuvimos que hacer fue adaptar el código para xv6, esto fue:
+Implementing the vgainit() program was easy; we used the example provided to us and only changed the values, using a natural language to xuser translator. However, we had some difficulty figuring out how to execute it in the main function. Our initial solution was to create a console.h file where our function would be, which, although it worked, looked messy. After some searching, we found the def.h file already included in the main.c, where we placed the vgainit() call, which solved the issue.
 
-- Ajustar el estilo del código para que quede bien con el estilo utilizado en xv6
+## Task 2
 
-- Utilizar las funciones outb e inb de xv6
+In this part of the laboratory, the main task was to implement functions that would allow us to switch between modes, which is a fundamental part of the work since all subsequent tasks rely on this.
 
-- Elegir los segmentos de código que nos interesaba i.e los modos 320x200x256 (modo gráfico 13h) y g_80x25_text (modo texto).
+Problems encountered:
+This task brought about several challenges as we were initially quite lost and unsure how to approach the problem. We went through a period of reading and researching about VGA functionality and xv6 code to better understand and see if any ideas would emerge. While this groundwork was crucial for the rest of the lab, we still found ourselves stuck on this exercise even after this period. The breakthrough came with the guidance provided by the course staff in the statement, specifically:
+"To switch modes involves setting particular values in the device's registers. For this, it is important to have a reference to the ports (see VGA Ports in the references below). And the real help is here: http://files.osdev.org/mirrors/geezer/osd/graphics/modes.c"
+Once we started approaching the problem with this in mind, everything became clearer. All we had to do was adapt the code for xv6, which involved:
 
-## Tarea 3
+- Adjusting the code style to match the style used in xv6.
 
-En este punto se nos pedia modularizar lo visto en la tarea II, implementado así las syscall modeswitch y plotpixel.
-Para esto y antes que nada creamos los archivos modeswitch.c, a donde trasladomos lo visto en la tarea II con el fin de modularlo y plotpixel.c, donde implementamos la función utilizando la información dada en el enunciado y la llamada a **P2V()**
-En este momento es cuando se complico un poco, ya que tuvimos que aprender como agregar una llamada al sistema. Por lo tanto nos pusimos a rastrear como estaban implementadas las demás syscalls, en que archivos estaban definidas, donde se declaraban los objetos y demás. Una vez visto esto, hicimos la prueba agregando los .c y .o en Makefile y los prototipos en defs.h
-En el medio agregamos al modeswitch.c una función para que limpiase toda la basura que quedaba del modo texto. A los días nos dimos cuenta que había una mejor forma de agregar las syscalls así que quitamos lo hecho y agregamos los extern int, [SYS_modeswitch] y [SYS_plotpixel] al archivo syscall.c y agregamos los define en el syscall.h
+- Utilizing the outb and inb functions from xv6.
 
-## Tarea 4: Recreando Zelda de NES (y sufriendo en el intento)
+- Selecting the code segments that were of interest to us, i.e., the 320x200x256 (graphics mode 13h) and g_80x25_text (text mode).
 
-Para la parte cuatro se nos dio la libertad de ser creativos con el modo grafico, y una de las ideas mas tentativas es la de hacer alguna especie de juego interactivo. La primera idea que se nos vino a la cabeza fueron los clasicos de Nintendo como Pokemon o Mario, pero uno que más nos llamó la atencion fué el The Legend of Zelda. Así nació entonces la idea de recrear, en lo posible, la aventura del juego original de NES.
-Graficos:
+## Task 3
 
-La parte de graficos se divide en dos secciones a implementar: El mapa y los sprites. Para el mapa iba a ser muy util una herramienta que nos permitiera crear escenarios con rapidez y facilidad, y así aparece el modulo tiles.h/c, que contiene funciones (implementadas como syscalls) que sirven para crear mapas. (./img/rock.png)
+At this point, we were asked to modularize what we had seen in task II, implementing the syscall modeswitch and plotpixel. To do this, we first created the modeswitch.c file, where we transferred what we had seen in task II in order to modularize it, and plotpixel.c, where we implemented the function using the information provided in the statement and the call to P2V().
 
-Lo primero es dibujar una roca como esta, que aparece en todo el mapa del juego. Se dibuja imitando la orignal, aunque esta simplificada para acelerar el trabajo. Para dibujarla utilizamos syscalls creadas anteriormente para la parte 3. Lo siguiente, es tener una funcion que pueda dibujar en pantalla una matriz de estas rocas, dando origen a la funcion void rock_bottom_matrix(int pos_x, int pos_y, int wide, int height, int color) Que dadas una posicion x,y, un ancho y un alto, y un color dibuja una matriz de estas rocas en la deseada posicion, con las deseadas dimensiones. (./img/matrix.png)
+At this moment, things got a little complicated as we had to learn how to add a system call. Therefore, we started tracing how other syscalls were implemented, in which files they were defined, where the objects were declared, and so on. Once we understood this, we tested by adding the .c and .o files in the Makefile and the prototypes in defs.h.
 
-Lo mismo ocurre para otros dibujos relacionados con el escenario, como lo son los arboles y otra roca que que tiene una curvatura. Teniendo estas funciones, la tarea de crear un escenario que recree los originales en The Legend of Zelda (o incluso nuevos escenarios) es bastante sencilla, puesto que el juego no tiene una geometría muy compleja, y los colores de los mapas varian entre verde, rojo y azul.
+In the meantime, we added a function to modeswitch.c to clean up all the garbage left from the text mode. After a few days, we realized that there was a better way to add the syscalls, so we removed what we had done and added the extern int, [SYS_modeswitch], and [SYS_plotpixel] to the syscall.c file and added the defines in the syscall.h file.
 
-Sprites: Para los sprites la tarea era recrear al personaje de Link (y enemigos) de la mejor manera posible. Una de las dificultades fue el tamaño, ya que no queríamos un personaje que quedara muy chiquito en el mapa, ni muy grande. La otra cuestion fue cómo implementar dicho sprite. La solucion final fue utilizar un array que contenga la informacion de dónde dibujar cada pixel, y de que color. Como los personajes se mueven en el escenario, es necesario crear sprites para las animaciones. En el caso de Link se necesitaron dos para cada posicion a la que se enfrentase (arriba, abajo, izquierda y derecha) siendo un total de ocho sprites para que pudiera dirigirse en los cuatro sentidos, de manera que tuviera una animacion de caminar al hacerlo. Como nuestra idea origial era hacer un juego interesante y más completo, idea que no ha podido concretarse debido al tiempo, pensamos que sería muy buena idea la creacion de un tipo abstracto de dato "Personaje" (o "Character" en ingles)
+## Task 4: Recreating NES Zelda (and struggling in the process)
+
+For the fourth part, we were given the freedom to be creative with the graphics mode, and one of the most tempting ideas was to create some kind of interactive game. The first idea that came to mind was classic Nintendo games like Pokemon or Mario, but one that particularly caught our attention was The Legend of Zelda. Thus, the idea of recreating, as much as possible, the adventure of the original NES game was born.
+
+Graphics:
+
+The graphics part is divided into two sections to implement: The map and the sprites. For the map, it would be very useful to have a tool that allows us to create scenarios quickly and easily, and thus the tiles.h/c module appears, which contains functions (implemented as syscalls) that serve to create maps. (./img/rock.png)
+
+The first step is to draw a rock like this one, which appears throughout the game map. It is drawn imitating the original, although simplified to speed up the work. To draw it, we used syscalls created earlier for part 3. Next, we need a function that can draw a matrix of these rocks on the screen, giving rise to the function void rock_bottom_matrix(int pos_x, int pos_y, int wide, int height, int color) which, given an x, y position, a width and a height, and a color, draws a matrix of these rocks at the desired position, with the desired dimensions. (./img/matrix.png)
+
+The same applies to other drawings related to the scenario, such as trees and another rock with a curvature. With these functions, the task of creating a scenario that recreates the original ones in The Legend of Zelda (or even new scenarios) is quite simple, since the game does not have very complex geometry, and the colors of the maps vary between green, red, and blue.
+
+Sprites: For the sprites, the task was to recreate the character of Link (and enemies) as best as possible. One of the difficulties was the size, as we did not want a character that would be too small or too large on the map. The other issue was how to implement such a sprite. The final solution was to use an array that contains the information of where to draw each pixel and what color. As the characters move in the scenario, it is necessary to create sprites for the animations. In the case of Link, two sprites were needed for each position he faced (up, down, left, and right), totaling eight sprites so he could move in all four directions, thus having a walking animation while doing so. Since our original idea was to create a more interesting and complete game, an idea that could not be realized due to time constraints, we thought it would be a very good idea to create an abstract data type "Character".
 
 ### TAD Character
 
-Con la siguiente estructura en mente: struct character_s { int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; //Este elemento ha sido descartado int spriteCounter[4]; int pos_x;int pos_y; }; diseñamos el TAD Character, donde en sprites se encontraría el arreglo con la informacion para dibujar al personaje (algo que ha sido removido de la entrega final, más sobre esto adelante.) un counter que sirve para elegir un correcto sprite a la hora de moverse y tener así una animacion, y las posiciones x e y en la pantalla. Y con los operaciones como: Crear un nuevo personaje dado unos sprites y unas posiciones, pintar un personaje en pantalla, obtener la posicion de un personaje dado, y funciones para mover a un personaje en la pantalla luego de recibir un input y chequeando que no se colisione con el escenario. Este TAD se encuentran en el modulo character.h/c y ha sido de gran utilidad a la hora de programar el codigo principal del juego, ayudando ademas su la legibilidad. Sin embargo debido a que el trabajo se ha relentizado considerablemente debido pequeños problemas que tardamos tiempo en solucionar, y al deadline, no hemos podido concretar nuestra primer idea. Como finalmente solo ibamos a mover a Link en el escenario (y no a otros personajes como iban a ser diferentes enemigos), terminamos recortando este TAD y quitamos el elemento sprites, dejando una version "hardcodeada" y que siempre trabaja con el unico personaje que llegamos a implementar. Aun así, el TAD character con su estructura y funciones ayuda bastante a la sencillez con la que podemos programar el codigo principal del juego, y es una herramienta que junto con las funciones del modulo tiles.h/c para crear mapas, nos peritió realizar un primer acercamiento a nuestra idea original con facilidad, que deja la puerta abierta para futuros progresos.
+With the following structure in mind: struct character_s { int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; //Este elemento ha sido descartado int spriteCounter[4]; int pos_x;int pos_y; }; We designed the ADT (Abstract Data Type) Character, where in sprites would be the array with the information to draw the character (which has been removed from the final delivery, more on this later), a counter that helps to choose the correct sprite when moving, and the x and y positions on the screen. With operations such as: creating a new character given some sprites and positions, drawing a character on the screen, obtaining the position of a given character, and functions to move a character on the screen after receiving input and checking for collisions with the scenario. This ADT is found in the module character.h/c and has been very useful when programming the main game code, also aiding its readability.
 
-### Resultado Zelda
+However, since the work has been considerably slowed down due to small problems that took time to solve, and due to the deadline, we have not been able to finalize our initial idea. Since ultimately we were only going to move Link on the stage (and not other characters as they were going to be different enemies), we ended up cutting this ADT and removing the sprites element, leaving a "hardcoded" version that always works with the only character we managed to implement. Still, the character ADT with its structure and functions greatly aids the simplicity with which we can program the main game code and is a tool that, along with the functions of the tiles.h/c module to create maps, allowed us to make an initial approach to our original idea with ease, leaving the door open for future progress.
+
+### Zelda Result
 
 ![](https://github.com/WalaSTH/vc-framebuffer/blob/master/image/zeldaDemo.gif)
 
-## Puntos estrella
+## Extra points
 
-- Todo lo que implementaron puede ser modularizado de una manera más delicada. Teniendo en cuenta que son funciones para un mismo dispositivo pueden estar en un mismo archivo vga.{c,h}
-  Para este ejercicio creamos las carpetas vga.c y vga.h, como se nos indico y fuimos creando y adecuando lo trabajado para que pudiece de dicha forma estar implementado y definido en estos archivos
+Everything you implemented can be modularized in a more delicate manner. Considering that these are functions for the same device, they can be in a single file vga.{c,h}. For this exercise, we created the folders vga.c and vga.h, as indicated, and we were creating and adjusting the work so that it could be implemented and defined in these files in this way.
 
 - agregar una nueva syscall:
   **plotrectangle(int x1, int y1, int x2, int y2, int color)**
-  para dibujar rectángulos en la pantalla.
-  Lo primero que hicimos fue crear el archivo plotrectangle.c donde implementamos la función mediante la utilización de dos for´s y al igual que como hicimos inicialmente en la tarea III, lo incluimos en defs.h y Makefile. Aunque después cambiamos y lo colocamos en syscall.{c,h}.
+  to draw rectangles on the screen.
+  The first thing we did was create the file plotrectangle.c where we implemented the function using two for loops, and just like we did initially in task III, we included it in defs.h and Makefile. However, later on, we changed it and placed it in syscall.{c,h}.
 
-- Recuperar las fuentes que se pierden cuando pasamos de modo gráfico a texto.
-  Para este punto nos basamos más que nada en lo que estaba escrito en la ayuda. Solo intuimos los pequeños cambios, esto sería, usar las syscalls que vienen en xv6 como inb y outb
+- Recover the fonts lost when switching from graphics mode to text mode.
+  For this, we primarily relied on what was written in the documentation. We mainly inferred the minor changes, which involved using the syscalls provided in xv6 such as inb and outb.
