@@ -67,7 +67,18 @@ Sprites: For the sprites, the task was to recreate the character of Link (and en
 
 ### TAD Character
 
-With the following structure in mind: struct character_s { int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; //Este elemento ha sido descartado int spriteCounter[4]; int pos_x;int pos_y; }; We designed the ADT (Abstract Data Type) Character, where in sprites would be the array with the information to draw the character (which has been removed from the final delivery, more on this later), a counter that helps to choose the correct sprite when moving, and the x and y positions on the screen. With operations such as: creating a new character given some sprites and positions, drawing a character on the screen, obtaining the position of a given character, and functions to move a character on the screen after receiving input and checking for collisions with the scenario. This ADT is found in the module character.h/c and has been very useful when programming the main game code, also aiding its readability.
+With the following structure in mind:
+
+```
+struct character_s {
+    int sprites[MAX_SPRITES][MAX_SPRITE_SIZE]; // This element has been discarded
+    int spriteCounter[4];
+    int pos_x;
+    int pos_y;
+};
+```
+
+We designed the ADT (Abstract Data Type) Character, where in sprites would be the array with the information to draw the character (which has been removed from the final delivery, more on this later), a counter that helps to choose the correct sprite when moving, and the x and y positions on the screen. With operations such as: creating a new character given some sprites and positions, drawing a character on the screen, obtaining the position of a given character, and functions to move a character on the screen after receiving input and checking for collisions with the scenario. This ADT is found in the module character.h/c and has been very useful when programming the main game code, also aiding its readability.
 
 However, since the work has been considerably slowed down due to small problems that took time to solve, and due to the deadline, we have not been able to finalize our initial idea. Since ultimately we were only going to move Link on the stage (and not other characters as they were going to be different enemies), we ended up cutting this ADT and removing the sprites element, leaving a "hardcoded" version that always works with the only character we managed to implement. Still, the character ADT with its structure and functions greatly aids the simplicity with which we can program the main game code and is a tool that, along with the functions of the tiles.h/c module to create maps, allowed us to make an initial approach to our original idea with ease, leaving the door open for future progress.
 
