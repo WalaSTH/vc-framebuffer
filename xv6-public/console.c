@@ -1,5 +1,5 @@
-// Console input and output.
-// Input is from the keyboard or serial port.
+// Console inputt and output.
+// Inputt is from the keyboard or serial port.
 // Output is written to the screen and serial port.
 
 #include "types.h"
@@ -202,7 +202,7 @@ struct {
   uint r;  // Read index
   uint w;  // Write index
   uint e;  // Edit index
-} input;
+} inputt;
 
 #define C(x)  ((x)-'@')  // Control-x
 
@@ -219,26 +219,26 @@ consoleintr(int (*getc)(void))
       doprocdump = 1;
       break;
     case C('U'):  // Kill line.
-      while(input.e != input.w &&
-            input.buf[(input.e-1) % INPUT_BUF] != '\n'){
-        input.e--;
+      while(inputt.e != inputt.w &&
+            inputt.buf[(inputt.e-1) % INPUT_BUF] != '\n'){
+        inputt.e--;
         consputc(BACKSPACE);
       }
       break;
     case C('H'): case '\x7f':  // Backspace
-      if(input.e != input.w){
-        input.e--;
+      if(inputt.e != inputt.w){
+        inputt.e--;
         consputc(BACKSPACE);
       }
       break;
     default:
-      if(c != 0 && input.e-input.r < INPUT_BUF){
+      if(c != 0 && inputt.e-inputt.r < INPUT_BUF){
         c = (c == '\r') ? '\n' : c;
-        input.buf[input.e++ % INPUT_BUF] = c;
+        inputt.buf[inputt.e++ % INPUT_BUF] = c;
         consputc(c);
-        if(c == '\n' || c == C('D') || input.e == input.r+INPUT_BUF){
-          input.w = input.e;
-          wakeup(&input.r);
+        if(c == '\n' || c == C('D') || inputt.e == inputt.r+INPUT_BUF){
+          inputt.w = inputt.e;
+          wakeup(&inputt.r);
         }
       }
       break;
@@ -260,20 +260,20 @@ consoleread(struct inode *ip, char *dst, int n)
   target = n;
   acquire(&cons.lock);
   while(n > 0){
-    while(input.r == input.w){
+    while(inputt.r == inputt.w){
       if(myproc()->killed){
         release(&cons.lock);
         ilock(ip);
         return -1;
       }
-      sleep(&input.r, &cons.lock);
+      sleep(&inputt.r, &cons.lock);
     }
-    c = input.buf[input.r++ % INPUT_BUF];
+    c = inputt.buf[inputt.r++ % INPUT_BUF];
     if(c == C('D')){  // EOF
       if(n < target){
         // Save ^D for next time, to make sure
         // caller gets a 0-byte result.
-        input.r--;
+        inputt.r--;
       }
       break;
     }
