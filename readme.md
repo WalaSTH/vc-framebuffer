@@ -87,7 +87,7 @@ However, since the work has been considerably slowed down due to small problems 
 
 ## Extra points
 
-Everything you implemented can be modularized in a more delicate manner. Considering that these are functions for the same device, they can be in a single file vga.{c,h}. For this exercise, we created the folders vga.c and vga.h, as indicated, and we were creating and adjusting the work so that it could be implemented and defined in these files in this way.
+Everything we implemented can be modularized in a more delicate manner. Considering that these are functions for the same device, they can be in a single file vga.{c,h}. For this exercise, we created the folders vga.c and vga.h, as indicated, and we were creating and adjusting the work so that it could be implemented and defined in these files in this way.
 
 - agregar una nueva syscall:
   **plotrectangle(int x1, int y1, int x2, int y2, int color)**
